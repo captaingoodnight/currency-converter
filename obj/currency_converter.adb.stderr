@@ -1,0 +1,4 @@
+currency_converter.adb:152:04: warning: variable "Last_Rate" is assigned but never read [-gnatwm]
+currency_converter.adb:170:17: warning: useless assignment of object to itself [-gnatwr]
+currency_converter.adb:179:07: warning: if statement has no effect [-gnatwr]
+currency_converter.adb:189:07: warning: "Count" is not modified, could be declared constant [-gnatwk]

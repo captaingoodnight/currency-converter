@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gprbuild -P ada_demo.gpr)",
+      "Bash(apt list:*)",
+      "Bash(dpkg -l)",
+      "Read(//usr/bin/**)",
+      "Read(//usr/local/bin/**)",
+      "Bash(sudo apt-get:*)"
+    ]
+  }
+}

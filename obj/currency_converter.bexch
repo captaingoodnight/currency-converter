@@ -1,0 +1,17 @@
+[GENERATED OBJECT FILE]
+b__currency_converter.o
+[PROJECT FILES]
+/home/parallels/Code/ada-demo/ada_demo.gpr
+20260318204351 6f37767a975185a5a56fd67fbe59a95c
+[BOUND OBJECT FILES]
+/home/parallels/Code/ada-demo/obj/currency_converter.o
+[GENERATED SOURCE FILES]
+b__currency_converter.ads
+b__currency_converter.adb
+b__currency_converter.ali
+[RESULTING OPTIONS]
+-L/home/parallels/Code/ada-demo/obj/
+-L/home/parallels/Code/ada-demo/obj/
+-L/usr/lib/gcc/aarch64-linux-gnu/13/adalib/
+-shared
+-lgnat-13
