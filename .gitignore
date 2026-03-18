@@ -1,8 +1,4 @@
 obj/
 currency_converter
 .claude/
-CLAUDE.MD
-obj/
-currency_converter
-.claude/
-
+CLAUDE.md
