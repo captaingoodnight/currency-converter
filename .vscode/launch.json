@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run currency_converter",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/currency_converter",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "externalConsole": true,
+      "MIMode": "gdb",
+      "preLaunchTask": "Build Ada Demo"
+    }
+  ]
+}

@@ -25,6 +25,7 @@ Verify the tools are available:
 gnat --version
 gprbuild --version
 curl --version
+gnatsas --version
 ```
 
 ---
