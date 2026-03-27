@@ -25,7 +25,7 @@
         {
             "label": "Analyze Project",
             "type": "shell",
-            "command": "codesonar analyze currency_converter localhost:7340 condesonar ada_scan.py ada_demo.gpr",
+            "command": "codesonar analyze /home/sevoy/hub_dir/currency_converter localhost:7340 codesonar ada_scan.py ada_demo.gpr",
             "group": "test",
             "problemMatcher": []
         }
