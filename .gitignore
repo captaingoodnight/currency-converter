@@ -3,3 +3,4 @@ currency_converter
 .claude/
 CLAUDE.md
 codesonar.ada_scan.x87t58ph.sarif
+codesonar/currency_converter analysis 4.sarif
