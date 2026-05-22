@@ -4,7 +4,7 @@
         {
             "label": "Build Project",
             "type": "shell",
-            "command": "gprbuild -P ada_demo.gpr",
+            "command": "gprbuild --config=default.cgpr -P ada_demo.gpr",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -23,10 +23,26 @@
             }
         },
         {
+            "label": "CodeSonar: Build Ada",
+            "type": "shell",
+            "command": "codesonar build /home/sevoy/projects/currency_converter localhost:7340 codesonar ada_scan.py ada_demo.gpr",
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "CodeSonar: Build C",
+            "type": "shell",
+            "command": "codesonar build /home/sevoy/projects/currency_converter localhost:7340 gprbuild --config=default.cgpr -P ada_demo.gpr -f -v",
+            "group": "test",
+            "dependsOn": "CodeSonar: Build Ada",
+            "problemMatcher": []
+        },
+        {
             "label": "Analyze Project",
             "type": "shell",
-            "command": "codesonar analyze /home/sevoy/hub_dir/currency_converter localhost:7340 codesonar ada_scan.py ada_demo.gpr",
+            "command": "codesonar analyze /home/sevoy/projects/currency_converter localhost:7340",
             "group": "test",
+            "dependsOn": "CodeSonar: Build C",
             "problemMatcher": []
         }
     ]
