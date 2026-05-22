@@ -17,6 +17,7 @@
 
 #include "ncurses_ui.h"
 #include <ncurses.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 
@@ -137,6 +138,8 @@ void ui_clear_main(void)
 
 void ui_prompt(const char *label, char *buf, int maxlen)
 {
+    char *scratch = malloc(maxlen);
+
     if (g_main_row >= g_sep2) return;
 
     int label_len = (int)strlen(label);

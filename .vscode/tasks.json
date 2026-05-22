@@ -23,16 +23,23 @@
             }
         },
         {
+            "label": "CodeSonar: Generate Token",
+            "type": "shell",
+            "command": "codesonar generate_hubbearerfile.py localhost:7340 ~/.codesonar/hubtoken -hubuser sevoy -f",
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
             "label": "CodeSonar: Build Ada",
             "type": "shell",
-            "command": "codesonar build /home/sevoy/projects/currency_converter localhost:7340 codesonar ada_scan.py ada_demo.gpr",
+            "command": "codesonar build /home/sevoy/projects/currency_converter localhost:7340 -auth bearer -hubbearerfile ~/.codesonar/hubtoken codesonar ada_scan.py ada_demo.gpr",
             "group": "test",
             "problemMatcher": []
         },
         {
             "label": "CodeSonar: Build C",
             "type": "shell",
-            "command": "codesonar build /home/sevoy/projects/currency_converter localhost:7340 gprbuild --config=default.cgpr -P ada_demo.gpr -f -v",
+            "command": "codesonar build /home/sevoy/projects/currency_converter localhost:7340 -auth bearer -hubbearerfile ~/.codesonar/hubtoken gprbuild --config=default.cgpr -P ada_demo.gpr -f -v",
             "group": "test",
             "dependsOn": "CodeSonar: Build Ada",
             "problemMatcher": []
@@ -40,7 +47,7 @@
         {
             "label": "Analyze Project",
             "type": "shell",
-            "command": "codesonar analyze /home/sevoy/projects/currency_converter localhost:7340",
+            "command": "codesonar analyze /home/sevoy/projects/currency_converter localhost:7340 -auth bearer -hubbearerfile ~/.codesonar/hubtoken",
             "group": "test",
             "dependsOn": "CodeSonar: Build C",
             "problemMatcher": []

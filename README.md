@@ -102,15 +102,25 @@ gprbuild  --config=default.cgpr -P ada_demo.gpr
 Three commands must be run in sequence. `localhost:7340` is the CodeSonar
 hub address; adjust if your hub runs elsewhere.
 
-Each command requires authentication with the CodeSonar hub. You will be
-prompted to log in at every step unless you configure a local password file
-or an authentication token — both approaches are described in the CodeSonar
-documentation.
+#### Authentication — generate a bearer token file
+
+Run this once to create a token file so subsequent commands authenticate
+without an interactive login prompt:
+
+```bash
+codesonar generate_hubbearerfile.py localhost:7340 ~/.codesonar/hubtoken \
+    -hubuser sevoy -f
+```
+
+You will be prompted for your password once. The token is written to
+`~/.codesonar/hubtoken` with owner-only permissions. Re-run this command
+whenever the session expires.
 
 **Step 1 — Analyze the Ada code:**
 
 ```bash
 codesonar build /home/sevoy/projects/currency_converter localhost:7340 \
+    -hubbearerfile ~/.codesonar/hubtoken \
     codesonar ada_scan.py ada_demo.gpr
 ```
 
@@ -118,13 +128,15 @@ codesonar build /home/sevoy/projects/currency_converter localhost:7340 \
 
 ```bash
 codesonar build /home/sevoy/projects/currency_converter localhost:7340 \
+    -hubbearerfile ~/.codesonar/hubtoken \
     gprbuild --config=default.cgpr -P ada_demo.gpr -f -v
 ```
 
 **Step 3 — Run the combined analysis:**
 
 ```bash
-codesonar analyze /home/sevoy/projects/currency_converter localhost:7340
+codesonar analyze /home/sevoy/projects/currency_converter localhost:7340 \
+    -hubbearerfile ~/.codesonar/hubtoken
 ```
 
 Steps 1 and 2 both accumulate build information into the same project
