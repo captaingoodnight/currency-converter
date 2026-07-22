@@ -2,9 +2,17 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Vendor: Build ncurses",
+            "type": "shell",
+            "command": "bash third_party/ncurses/build.sh",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
             "label": "Build Project",
             "type": "shell",
             "command": "gprbuild --config=default.cgpr -P ada_demo.gpr",
+            "dependsOn": "Vendor: Build ncurses",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -16,7 +24,7 @@
                     "regexp": "^(.+):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
                     "file": 1,
                     "line": 2,
-                    "column": 3,
+                    "column": 3, 
                     "severity": 4,
                     "message": 5
                 }
@@ -25,22 +33,23 @@
         {
             "label": "CodeSonar: Build Ada",
             "type": "shell",
-            "command": "codesonar build /home/sevoy/projects/currency_converter localhost:7340 codesonar ada_scan.py ada_demo.gpr",
+            "command": "codesonar build C:\\Users\\seane\\Projects\\currency-converter http://[::1]:7340/ -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt codesonar ada_scan.py ada_demo.gpr",
             "group": "test",
             "problemMatcher": []
         },
         {
             "label": "CodeSonar: Build C",
             "type": "shell",
-            "command": "codesonar build /home/sevoy/projects/currency_converter localhost:7340 gprbuild --config=default.cgpr -P ada_demo.gpr -f -v",
+            "command": "codesonar build C:\\Users\\seane\\Projects\\currency-converter http://[::1]:7340/ -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt gprbuild --config=default.cgpr -P ada_demo.gpr -f -v",
             "group": "test",
-            "dependsOn": "CodeSonar: Build Ada",
+            "dependsOn": ["CodeSonar: Build Ada"],
+            "dependsOrder": "sequence",
             "problemMatcher": []
         },
         {
             "label": "Analyze Project",
             "type": "shell",
-            "command": "codesonar analyze /home/sevoy/projects/currency_converter localhost:7340",
+            "command": "codesonar analyze C:\\Users\\seane\\Projects\\currency-converter -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt http://[::1]:7340/",
             "group": "test",
             "dependsOn": "CodeSonar: Build C",
             "problemMatcher": []
