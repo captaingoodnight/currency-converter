@@ -6,13 +6,19 @@ project Ada_Demo is
    for Exec_Dir    use ".";
    for Main        use ("currency_converter.adb");
 
+   Ncurses_Prefix := Project'Project_Dir & "third_party/ncurses/install";
+
    package Compiler is
       for Default_Switches ("Ada") use ("-g", "-O2", "-gnatwa");
-      for Default_Switches ("C")   use ("-g", "-O2", "-Wall", "-Wextra");
+      for Default_Switches ("C")   use
+        ("-g", "-O2", "-Wall", "-Wextra", "-DNCURSES_STATIC",
+         "-I" & Ncurses_Prefix & "/include/ncurses",
+         "-I" & Ncurses_Prefix & "/include");
    end Compiler;
 
    package Linker is
-      for Default_Switches ("Ada") use ("-lncurses");
+      for Default_Switches ("Ada") use
+        ("-L" & Ncurses_Prefix & "/lib", "-lncurses");
    end Linker;
 
 end Ada_Demo;

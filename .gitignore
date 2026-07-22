@@ -1,8 +1,15 @@
 obj/
 currency_converter
+currency_converter.exe
 .claude/
 CLAUDE.md
 *.sarif
 x86_64-linux.cgpr
 gnatsas/
 codesonar/
+hub_bf.txt
+third_party/ncurses/ncurses-*.tar.gz
+third_party/ncurses/ncurses-*/
+third_party/ncurses/install/
+third_party/ncurses/t.i
+third_party/ncurses/t.s

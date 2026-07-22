@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "codesonar": {
+      "command": "codesonar",
+      "args": [
+        "mcp_server.py",
+        "http://[::1]:7340/",
+        "-auth",
+        "bearer",
+        "-hubbearerfile",
+        "hub_bf.txt",
+        "--project",
+        "/CurrencyConverter"
+      ]
+    }
+  }
+}
