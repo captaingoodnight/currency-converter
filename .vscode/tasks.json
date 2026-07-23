@@ -33,14 +33,14 @@
         {
             "label": "CodeSonar: Build Ada",
             "type": "shell",
-            "command": "codesonar build ${env:CODESONAR_PROJECT_DIR} ${env:CODESONAR_HUB_URL} -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt codesonar ada_scan.py ada_demo.gpr",
+            "command": "codesonar build ${env:CODESONAR_PROJECT_DIR}\\currency-converter ${env:CODESONAR_HUB_URL} -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt codesonar ada_scan.py ada_demo.gpr",
             "group": "test",
             "problemMatcher": []
         },
         {
             "label": "CodeSonar: Build C",
             "type": "shell",
-            "command": "codesonar build ${env:CODESONAR_PROJECT_DIR} ${env:CODESONAR_HUB_URL} -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt gprbuild --config=default.cgpr -P ada_demo.gpr -f -v",
+            "command": "codesonar build ${env:CODESONAR_PROJECT_DIR}\\currency-converter ${env:CODESONAR_HUB_URL} -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt gprbuild --config=default.cgpr -P ada_demo.gpr -f -v",
             "group": "test",
             "dependsOn": ["CodeSonar: Build Ada"],
             "dependsOrder": "sequence",
@@ -49,7 +49,7 @@
         {
             "label": "Analyze Project",
             "type": "shell",
-            "command": "codesonar analyze ${env:CODESONAR_PROJECT_DIR} -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt ${env:CODESONAR_HUB_URL}",
+            "command": "codesonar analyze ${env:CODESONAR_PROJECT_DIR}\\currency-converter -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt ${env:CODESONAR_HUB_URL}",
             "group": "test",
             "dependsOn": "CodeSonar: Build C",
             "problemMatcher": []
