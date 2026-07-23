@@ -33,7 +33,7 @@ toolchain, which ships its own `gprbuild` that does not support native
 compilation:
 
 ```bash
-export PATH="/home/sevoy/usr/gnat/bin:$PATH"
+export PATH="/path/to/gnat/bin:$PATH"
 ```
 
 Add this to your shell profile (`~/.bashrc` or `~/.bash_profile`) to make it
@@ -110,21 +110,21 @@ documentation.
 **Step 1 — Analyze the Ada code:**
 
 ```bash
-codesonar build /home/sevoy/projects/currency_converter localhost:7340 \
+codesonar build /path/to/currency_converter localhost:7340 \
     codesonar ada_scan.py ada_demo.gpr
 ```
 
 **Step 2 — Analyze the C code:**
 
 ```bash
-codesonar build /home/sevoy/projects/currency_converter localhost:7340 \
+codesonar build /path/to/currency_converter localhost:7340 \
     gprbuild --config=default.cgpr -P ada_demo.gpr -f -v
 ```
 
 **Step 3 — Run the combined analysis:**
 
 ```bash
-codesonar analyze /home/sevoy/projects/currency_converter localhost:7340
+codesonar analyze /path/to/currency_converter localhost:7340
 ```
 
 Steps 1 and 2 both accumulate build information into the same project
