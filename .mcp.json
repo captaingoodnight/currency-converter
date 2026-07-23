@@ -4,7 +4,7 @@
       "command": "codesonar",
       "args": [
         "mcp_server.py",
-        "http://legolas.local:7340/",
+        "${CODESONAR_HUB_URL}",
         "-auth",
         "bearer",
         "-hubbearerfile",
