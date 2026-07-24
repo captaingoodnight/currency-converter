@@ -13,3 +13,7 @@ third_party/ncurses/ncurses-*/
 third_party/ncurses/install/
 third_party/ncurses/t.i
 third_party/ncurses/t.s
+
+# GNATtest — regenerated specs, rewritten on every gnattest run
+tests/**/*-test_data.ads
+tests/**/*-test_data-tests.ads
