@@ -33,7 +33,7 @@
         {
             "label": "CodeSonar: Build Ada",
             "type": "shell",
-            "command": "codesonar build ${env:CODESONAR_PROJECT_DIR}\\currency-converter ${env:CODESONAR_HUB_URL} -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt codesonar ada_scan.py ada_demo.gpr",
+            "command": "codesonar build ${env:CODESONAR_PROJECT_DIR}\\currency-converter ${env:CODESONAR_HUB_URL} -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt codesonar ada_scan.py -include-sources src/*.adb -include-sources src/*.ads ada_demo.gpr",
             "group": "test",
             "problemMatcher": []
         },
@@ -52,6 +52,30 @@
             "command": "codesonar analyze ${env:CODESONAR_PROJECT_DIR}\\currency-converter -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt ${env:CODESONAR_HUB_URL}",
             "group": "test",
             "dependsOn": "CodeSonar: Build C",
+            "problemMatcher": []
+        },
+        {
+            "label": "CodeSonar: Build Ada - Clean",
+            "type": "shell",
+            "command": "codesonar build ${env:CODESONAR_PROJECT_DIR}\\currency-converter ${env:CODESONAR_HUB_URL} -project /CurrencyConverter -clean -auth bearer -hubbearerfile hub_bf.txt codesonar ada_scan.py -include-sources src/*.adb -include-sources src/*.ads ada_demo.gpr",
+            "group": "test",
+            "problemMatcher": []
+        },
+        {
+            "label": "CodeSonar: Build C - Clean",
+            "type": "shell",
+            "command": "codesonar build ${env:CODESONAR_PROJECT_DIR}\\currency-converter ${env:CODESONAR_HUB_URL} -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt gprbuild --config=default.cgpr -P ada_demo.gpr -f -v",
+            "group": "test",
+            "dependsOn": "CodeSonar: Build Ada - Clean",
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "Analyze Project - Clean",
+            "type": "shell",
+            "command": "codesonar analyze ${env:CODESONAR_PROJECT_DIR}\\currency-converter -project /CurrencyConverter -auth bearer -hubbearerfile hub_bf.txt ${env:CODESONAR_HUB_URL}",
+            "group": "test",
+            "dependsOn": "CodeSonar: Build C - Clean",
             "problemMatcher": []
         }
     ]
