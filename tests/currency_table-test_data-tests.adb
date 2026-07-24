@@ -15,6 +15,9 @@ with System.Assertions;
 --
 --  end read only
 
+with Ada.Text_IO;
+with Ada.Strings.Fixed; use Ada.Strings.Fixed;
+
 --  begin read only
 --  end read only
 package body Currency_Table.Test_Data.Tests is
@@ -41,9 +44,18 @@ package body Currency_Table.Test_Data.Tests is
 
    begin
 
-      AUnit.Assertions.Assert
-        (Gnattest_Generated.Default_Assert_Value,
-         "Test not implemented.");
+      Assert (Is_Valid_Currency ("USD"),
+              "USD should be a valid currency code");
+      Assert (Is_Valid_Currency ("EUR"),
+              "EUR should be a valid currency code");
+      Assert (not Is_Valid_Currency ("XXX"),
+              "XXX is not in the currency table and should be invalid");
+      Assert (not Is_Valid_Currency ("US"),
+              "a 2-character code should be invalid");
+      Assert (not Is_Valid_Currency ("USDD"),
+              "a 4-character code should be invalid");
+      Assert (not Is_Valid_Currency ("usd"),
+              "currency codes are matched case-sensitively");
 
 --  begin read only
    end Test_Is_Valid_Currency;
@@ -60,11 +72,45 @@ package body Currency_Table.Test_Data.Tests is
 
       pragma Unreferenced (Gnattest_T);
 
+      Temp_Name    : constant String := "test_display_currencies_output.tmp";
+      Output       : Ada.Text_IO.File_Type;
+      Found_Header : Boolean := False;
+      Found_USD    : Boolean := False;
+
    begin
 
-      AUnit.Assertions.Assert
-        (Gnattest_Generated.Default_Assert_Value,
-         "Test not implemented.");
+      Ada.Text_IO.Create (Output, Ada.Text_IO.Out_File, Temp_Name);
+      Ada.Text_IO.Set_Output (Output);
+
+      begin
+         Display_Currencies;
+      exception
+         when others =>
+            Ada.Text_IO.Set_Output (Ada.Text_IO.Standard_Output);
+            Ada.Text_IO.Close (Output);
+            raise;
+      end;
+
+      Ada.Text_IO.Set_Output (Ada.Text_IO.Standard_Output);
+      Ada.Text_IO.Close (Output);
+
+      Ada.Text_IO.Open (Output, Ada.Text_IO.In_File, Temp_Name);
+      while not Ada.Text_IO.End_Of_File (Output) loop
+         declare
+            Line : constant String := Ada.Text_IO.Get_Line (Output);
+         begin
+            if Line = "Supported currencies:" then
+               Found_Header := True;
+            end if;
+            if Index (Line, "USD") > 0 then
+               Found_USD := True;
+            end if;
+         end;
+      end loop;
+      Ada.Text_IO.Delete (Output);
+
+      Assert (Found_Header, "Display_Currencies should print the header line");
+      Assert (Found_USD, "Display_Currencies should list the USD entry");
 
 --  begin read only
    end Test_Display_Currencies;
